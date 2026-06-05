@@ -23,7 +23,7 @@ const Contact = () => {
           <p className='text-gray-500 leading-0.5 '>
           Email: greatstackdev@gmail.com</p>
 
-          <p  className=' font-semibold  text-lg  text-gray-600 '> CAREERS AT PRESCRIPTO</p>
+          <p  className=' font-semibold  text-lg  text-gray -600 '> CAREERS AT PRESCRIPTO</p>
 
           <p className='text-gray-500'>Learn more about our teams and job openings.</p>
 
