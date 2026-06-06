@@ -143,8 +143,8 @@ const Appointment = () => {
                 docSlots?.length > 0  && docSlots[slotIndex].map((item, index)=>{
                   return(
                     <p key={index}onClick={()=>setslotTime(item.time)}
-                     className={` text-sm font-ligh flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time === slotTime ?
-                     'bg-primary text-white' : 'text-gray-400 border border-gray-300'} `} >
+                     className={`text-sm font-ligh flex-shrink-0 px-5 py-2 rounded-full cursor-pointer 
+                      ${item.time === slotTime ?'bg-primary text-white' : 'text-gray-400 border border-gray-300'} `} >
                      {  item.time.toLowerCase() }
                     </p>
                     )
