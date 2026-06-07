@@ -44,6 +44,24 @@ const [isEdit, setisEdit] = useState(false)
         : <p>{userData.phone}</p>
 
       }
+       <p>Address:</p>
+       {
+        isEdit
+        ?
+        <p> 
+        <input type="" />
+        <hr />
+        <input type="text" />
+         </p> 
+        :
+        <p>
+          {userData.address.line1}
+          <hr />
+          {userData.address.line2}
+        </p>
+       }
+
+
         </div>
       </div>
     </div>
