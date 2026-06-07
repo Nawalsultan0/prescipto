@@ -7,7 +7,7 @@ const Myprofile = () => {
  const [userData, setuserData] = useState({ 
   name:"Edward Vincent",
   image:assets.profile_pic,
-  email:'nawal03.sultan2004@gmail.com',
+  email:'Edward.vincant2004@gmail.com',
   phone:"+1 123 456 789 ",
   address:{
     line1:"57th Cross, Richmond ",
