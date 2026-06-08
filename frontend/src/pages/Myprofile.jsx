@@ -54,11 +54,7 @@ const [isEdit, setisEdit] = useState(false)
         <input type="text" />
          </p> 
         :
-        <p>
-          {userData.address.line1}
-          <hr />
-          {userData.address.line2}
-        </p>
+        
        }
 
 
