@@ -14,7 +14,7 @@ const Myprofile = () => {
     line2:"Circle Curhch Road, London"
   },
   gender:'Male',
-  Dob:'2000-01-20'
+  dob:'2000-01-20'
 })
 
 const [isEdit, setisEdit] = useState(false)
@@ -64,6 +64,41 @@ const [isEdit, setisEdit] = useState(false)
 
         </div>
       </div>
+       
+       <div>
+        <p>BASIC INFORMATION </p>
+        <div>
+          <p>GENDER:</p>
+          {
+            isEdit ?
+            <select onChange={ (e)=> setuserData(prev =>({...prev,gender:e.target.value}))} value={userData.gender}  >
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            : <p>{userData.gender}</p>
+          }
+            <p>Birthday</p>
+            {
+              isEdit?
+              <input type="date"  onChange={ (e) => setuserData (prev =>({...prev, dob:e.target.value})) } value={userData.dob}    />
+              :
+              <p>{userData.dob}  </p>
+            }
+
+        </div>
+       </div>
+     
+
+        <div>
+          {
+            isEdit?
+              <button onClick={()=> setisEdit(false)}>Save Information </button>
+            : <button onClick={()=> setisEdit(true)}>Edit</button>
+          }
+        </div>
+
+
+
     </div>
   )
 }
