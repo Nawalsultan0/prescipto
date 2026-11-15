@@ -1,5 +1,6 @@
 import validator from 'validator';
-import byc
+import bycrypt from "bcrypt"
+import { v2 as cloudinary } from 'cloudinary'
 
 ////// api for adding doctor 
 
@@ -26,7 +27,12 @@ const addDoctor = async(req,res)=>{
       }
        
       ///// hashing doctor password 
-      const salt =  await 
+      const salt =  await bycrypt.genSalt(10);
+        const hashedPassword =await bycrypt.hash(password, salt)
+        
+        
+
+        ///  upload imagwe to cloudinary 
 
 
 }
