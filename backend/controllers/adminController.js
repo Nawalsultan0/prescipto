@@ -1,6 +1,8 @@
+import 'dotenv/config';
 import validator from 'validator';
 import bycrypt from "bcrypt"
-import { v2 as cloudinary } from 'cloudinary'
+import { v2 as cloudinary } from 'cloudinary';
+
 import Doctor from "../models/doctorModel.js";
 
 ////// api for adding doctor 
@@ -13,6 +15,12 @@ const addDoctor = async(req,res)=>{
         
 
        console.log({name, email, password, speciality, degree, experience, about, fees, address}, imageFile)
+       //console.log("COMPLETE BODY:", req.body);
+
+      ///console.log("ALL FIELD NAMES:", Object.keys(req.body));
+
+         // console.log("EMAIL:", req.body.email); 
+
 
        ///checking  for all  data to add doctor in the data base 
        if(!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address){
@@ -38,6 +46,10 @@ const addDoctor = async(req,res)=>{
 
         const imageUrl = imageUpload.secure_url;
 
+        if (!imageFile) {
+  return res.json({ success: false, message: "Please upload a doctor image" });
+}
+
         const doctorData={
           name,
           email,
@@ -61,6 +73,7 @@ const addDoctor = async(req,res)=>{
      }
   catch(error){
      console.log(error)
+     
       res.json({success: false, message: error.message })
   }
 }
