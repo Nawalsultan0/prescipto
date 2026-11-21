@@ -2,7 +2,7 @@ import 'dotenv/config';
 import validator from 'validator';
 import bycrypt from "bcrypt"
 import { v2 as cloudinary } from 'cloudinary';
-
+import jwt from 'jsonwebtoken';
 import Doctor from "../models/doctorModel.js";
 
 ////// api for adding doctor 
@@ -14,7 +14,7 @@ const addDoctor = async(req,res)=>{
        const imageFile = req.file;
         
 
-       console.log({name, email, password, speciality, degree, experience, about, fees, address},imageFile)
+       //console.log({name, email, password, speciality, degree, experience, about, fees, address},imageFile)
 
        ///checking  for all  data to add doctor in the data base 
        if(!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address){
@@ -72,4 +72,30 @@ const addDoctor = async(req,res)=>{
   }
 }
 
-export {addDoctor}
+
+const loginAdmin = (req,res)=>{
+
+  try{
+    
+    const {email, password} = req. body;
+
+    if(email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD){
+      const token = jwt.sign(email+password, process.env.JWT_SECRET)
+      res.json({success:true,token})
+
+
+    }
+    else{
+      res.json({success:false , message:"Invalid Email and Password"})
+    }
+
+  }
+  catch(error){
+    console.log("error:", error)
+    return res.json({success:false , message:error.message })
+  }
+
+
+}
+
+export {addDoctor,loginAdmin}
