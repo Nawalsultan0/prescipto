@@ -14,18 +14,14 @@ const addDoctor = async(req,res)=>{
        const imageFile = req.file;
         
 
-       console.log({name, email, password, speciality, degree, experience, about, fees, address}, imageFile)
-       //console.log("COMPLETE BODY:", req.body);
-
-      ///console.log("ALL FIELD NAMES:", Object.keys(req.body));
-
-         // console.log("EMAIL:", req.body.email); 
-
+       console.log({name, email, password, speciality, degree, experience, about, fees, address},imageFile)
 
        ///checking  for all  data to add doctor in the data base 
        if(!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address){
            return res.json({success: false , message: "please fill all the fields"})
        }
+
+
       if(!validator.isEmail(email)){
         return res.json({success: false , message: "please enter the valid email"})  
       }
@@ -46,10 +42,7 @@ const addDoctor = async(req,res)=>{
 
         const imageUrl = imageUpload.secure_url;
 
-        if (!imageFile) {
-  return res.json({ success: false, message: "Please upload a doctor image" });
-}
-
+        
         const doctorData={
           name,
           email,
@@ -72,9 +65,10 @@ const addDoctor = async(req,res)=>{
 
      }
   catch(error){
-     console.log(error)
-     
-      res.json({success: false, message: error.message })
+        console.error("Error:", error);
+        
+
+        res.json({success: false, message:error.message})
   }
 }
 
