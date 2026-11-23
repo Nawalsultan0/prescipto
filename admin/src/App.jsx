@@ -1,10 +1,11 @@
 
 import { useContext } from "react";
 import Login from "./pages/Login"
-  import { ToastContainer, toast } from 'react-toastify';
+  import {ToastContainer, toast } from 'react-toastify';
 import { AppContext } from "./context/AppContext";
 import { AdminContext } from "./context/AdminContext";
 import Navbar from "./coponents/Navbar";
+import Sidebar from "./coponents/Sidebar";
 
  
 const App = () => {
@@ -15,10 +16,13 @@ const App = () => {
     <div className=" bg-[#F8F9FD]" >
       <ToastContainer/>
       <Navbar/>
+      <div className="  flex items-center" >
+        <Sidebar/>
+      </div>  
        </div>
   ) :(
     <>
-    <Login/>
+    <Login/>   
     <ToastContainer/>
     </>
   )
