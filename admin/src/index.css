@@ -14,6 +14,9 @@
   
 }
 
+::-webkit-scrollbar{
+  @apply hidden
+}
 
 *{
    font-family: "Outfit", sans-serif;
