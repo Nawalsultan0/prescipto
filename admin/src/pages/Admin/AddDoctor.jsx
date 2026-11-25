@@ -14,7 +14,7 @@ const AddDoctor = () => {
     const [experience, setexperience] = useState('1 Year')
     const [fees, setfees] = useState('')
     const [about, setabout] = useState('')
-    const [Specialtity, setSpecialtity] = useState('General physician')
+    const [speciality, setspeciality] = useState('General physician')
     const [degree, setdegree] = useState('')
     const [address1, setaddress1] = useState('')
     const [address2, setaddress2] = useState('')
@@ -35,7 +35,7 @@ const AddDoctor = () => {
         formData.append('experience',experience );
         formData.append('fees',Number(fees) );
         formData.append('about',about);
-        formData.append('Specialtity',Specialtity);
+        formData.append('speciality',speciality);
         formData.append('degree',degree);
         formData.append('address',JSON.stringify({line1:address1,line2:address2}));
 
@@ -43,9 +43,25 @@ const AddDoctor = () => {
         formData.forEach((value, key)=>{
             console.log(`${key}: ${value}`);
         })
-       const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData,{headers})
-      } catch (error) {
-        
+       const {data} = await axios.post(backendUrl + '/api/admin/add-doctor', formData,{headers:{aToken   }})
+        if(data.success){
+            toast.success(data.message)
+            setdocImg(false);
+            setname('');
+            setemail('');
+            setpassword('');
+            setdegree('');
+            setfees('');
+            setaddress1('');
+            setaddress2('');
+            setabout('');
+        }  else{
+            toast.error(data.message)
+        }
+    
+    } catch (error) {
+        console.log(error)
+        toast.error(error.message)
       }
 
    }
@@ -123,8 +139,8 @@ const AddDoctor = () => {
                  <div className=" w-full lg:flex-1 flex flex-col gap-4 " >
 
                       <div className="flex-1 flex flex-col gap-1 ">
-                    <p>Specialtity</p>
-                   <select  onChange={(e)=>setSpecialtity(e.target.value) } value={Specialtity} className=" border rounded px-3 py-2  " >
+                    <p>Speciality</p>
+                   <select  onChange={(e)=>setspeciality(e.target.value) } value={speciality} className=" border rounded px-3 py-2  " >
                     <option value="General physician">General physician</option>
                     <option value="Gynecologist">Gynecologist</option>
                     <option value="Dermatologist">Dermatologist</option>
@@ -143,8 +159,8 @@ const AddDoctor = () => {
 
                   <div className="flex-1 flex flex-col gap-1s">
                     <p>Address</p>
-                    <input  onChange={(e)=>setaddress1(e.target.value) } value={address1} className=" border rounded px-3 py-2  " type="text" placeholder="address 2" required />
-                    <input   onChange={(e)=>setaddress2(e.target.value) } value={address2} className=" border rounded px-3 py-2  " type="text" placeholder="address 1" required />
+                    <input  onChange={(e)=>setaddress1(e.target.value) } value={address1} className=" border rounded px-3 py-2  " type="text" placeholder="address 1" required />
+                    <input   onChange={(e)=>setaddress2(e.target.value) } value={address2} className=" border rounded px-3 py-2  " type="text" placeholder="address 2" required />
                 </div>
                 
             </div>

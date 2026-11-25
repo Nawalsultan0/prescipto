@@ -14,7 +14,7 @@ const addDoctor = async(req,res)=>{
        const imageFile = req.file;
         
 
-       //console.log({name, email, password, speciality, degree, experience, about, fees, address},imageFile)
+       console.log({name, email, password, speciality, degree, experience, about, fees, address},imageFile)
 
        ///checking  for all  data to add doctor in the data base 
        if(!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address){
