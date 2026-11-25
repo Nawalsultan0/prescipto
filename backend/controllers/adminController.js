@@ -4,6 +4,7 @@ import bycrypt from "bcrypt"
 import { v2 as cloudinary } from 'cloudinary';
 import jwt from 'jsonwebtoken';
 import Doctor from "../models/doctorModel.js";
+import doctorModel from '../models/doctorModel.js';
 
 ////// api for adding doctor 
 
@@ -98,4 +99,17 @@ const loginAdmin = (req,res)=>{
 
 }
 
-export {addDoctor,loginAdmin}
+
+///api to get all doctors list for admin pannel
+const allDoctors = async (req,res)=>{
+  try {
+    /// need every data accpect password
+     const doctors = await doctorModel.find({}).select('-password');
+     res.json({success:true, doctors });
+  } catch (error) {
+    console.log("error", error)
+    return res.json({success:false, message:error.message})
+  }
+}
+
+export {addDoctor,loginAdmin,allDoctors }
