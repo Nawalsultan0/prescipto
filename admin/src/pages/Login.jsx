@@ -33,13 +33,12 @@ const onSubmitHandler = async(event)=>{
      }
      else{
      toast.error(data.message);
-    } 
-  }else{
-    
-  }
-
+    }
+   }
+  
   } catch (error) {
     console.log(error)
+    toast.error(error.message)
   }
 
 }
