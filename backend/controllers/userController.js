@@ -12,7 +12,7 @@ const registerUser = async (req,res)=>{
         const {name, email, password} = req.body;
 
         if(!name || !email || !password){
-            return res.json({success:false, message:"missing Credientials" })
+            return res.json({success:false, message:"missing Credentials" })
         }
 
         if(!validator.isEmail(email)){
@@ -28,7 +28,7 @@ const registerUser = async (req,res)=>{
         /// validating  strong password
 
         const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
+        const hashedPassword = await bcrypt.hash(password,salt);
 
         ////saved hashed password in the db using object 
 
@@ -40,7 +40,7 @@ const registerUser = async (req,res)=>{
         
         ///save in the database
 
-        const newUser = new userModel(userData)
+        const newUser = new userModel(userData);
         const user = await newUser.save();
         
         
@@ -56,4 +56,27 @@ const registerUser = async (req,res)=>{
 
 }
 
-export {registerUser};
+const loginUser = async (req,res) => {
+    try {
+        
+    const { email, password} = req.body;
+    const user = await userModel.findOne({email})
+    if(!user){
+        return res.json({success:false , message: "User does not exist"});
+    }
+      const isMatch = await bcrypt.compare(password,user.password)
+
+      if(isMatch){
+        const token = jwt.sign({id:user._id},process.env.JWT_SECRET )
+        return res.json({success:true, token});
+      }else{
+        return res.json({success:false, message:"Invalid Credential"})
+      }
+
+    } catch (error) {
+        console.log("error", error);
+        return res.json({success: false, message:error.message})
+    }
+}
+
+export {registerUser, loginUser};
